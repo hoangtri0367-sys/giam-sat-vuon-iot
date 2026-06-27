@@ -46,7 +46,7 @@ app = Flask(__name__)
 DB_PATH         = os.environ.get("DB_PATH", "cai_ngot.db")
 
 # Telegram Bot
-TELEGRAM_TOKEN   = os.environ.get("TELEGRAM_TOKEN",   "")
+TELEGRAM_TOKEN   = os.environ.get("TELEGRAM_TOKEN",8813861052:AAFAjPXv-4RR66dQQkZ_dMyqybq88YtACTI "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID",8916859053 "")
 
 # Email báo cáo tuần
