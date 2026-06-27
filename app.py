@@ -47,7 +47,7 @@ DB_PATH         = os.environ.get("DB_PATH", "cai_ngot.db")
 
 # Telegram Bot
 TELEGRAM_TOKEN   = os.environ.get("TELEGRAM_TOKEN",   "")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID",8916859053 "")
 
 # Email báo cáo tuần
 EMAIL_SENDER    = os.environ.get("EMAIL_SENDER",    "")
