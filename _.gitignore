@@ -1,0 +1,52 @@
+# ——— Môi trường & bí mật ———
+.env
+*.env
+
+# ——— Database ———
+*.db
+*.sqlite
+*.sqlite3
+
+# ——— Ảnh ESP32-CAM lưu local ———
+uploads/
+images/
+*.jpg
+*.jpeg
+*.png
+
+# ——— Python ———
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ——— Virtual environment ———
+venv/
+.venv/
+env/
+
+# ——— IDE ———
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ——— OS ———
+.DS_Store
+Thumbs.db
+
+# ——— Log ———
+*.log
+logs/
+
+# ——— Excel báo cáo (sinh ra tự động) ———
+*.xlsx
+reports/
+
+# ——— Backup DB tạm (sinh ra tự động, gửi qua Telegram) ———
+backups/
+*.json.gz
