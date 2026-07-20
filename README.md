@@ -1,8 +1,8 @@
 # 🌿 Hệ thống IoT Giám sát Sinh trưởng Cải Ngọt
 
-Đồ án tốt nghiệp — Hệ thống giám sát và điều khiển tự động môi trường trồng cải ngọt (cải bẹ xanh) ứng dụng IoT, kết hợp cảm biến môi trường, xử lý ảnh (Computer Vision) và cảnh báo qua Telegram.
+Đồ án tốt nghiệp — Hệ thống giám sát và điều khiển tự động môi trường trồng cải ngọt ứng dụng IoT, kết hợp cảm biến môi trường, xử lý ảnh (Computer Vision) và cảnh báo qua Telegram.
 
-**Thực hiện bởi:** Trần Trí & Trần Văn Thịnh
+**Thực hiện bởi:** Trần Hoàng Trí & Trần Văn Thịnh
 
 ---
 
