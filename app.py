@@ -55,9 +55,9 @@ LIGHT_ALERT_END_HOUR   = int(os.environ.get("LIGHT_ALERT_END_HOUR",   "18"))  # 
 STAGE_NAMES = ["Nay_Mam", "Cay_Con", "Sinh_Truong", "Thu_Hoach"]
 THRESHOLDS = [
     {"soil_min": 60, "soil_max": 80, "temp_max": 34},  # 0 Nảy mầm
-    {"soil_min": 55, "soil_max": 75, "temp_max": 32},  # 1 Cây con
-    {"soil_min": 45, "soil_max": 70, "temp_max": 35},  # 2 Sinh trưởng
-    {"soil_min": 40, "soil_max": 65, "temp_max": 35},  # 3 Thu hoạch
+    {"soil_min": 55, "soil_max": 75, "temp_max": 35},  # 1 Cây con
+    {"soil_min": 45, "soil_max": 70, "temp_max": 36},  # 2 Sinh trưởng
+    {"soil_min": 40, "soil_max": 65, "temp_max": 36},  # 3 Thu hoạch
 ]
 
 # ── STATE ────────────────────────────────────────────
