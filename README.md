@@ -1,24 +1,23 @@
-# 🌿 Hệ thống IoT Giám sát Sinh trưởng Cải Ngọt
+Hệ thống IoT Giám sát Sinh trưởng Cải Ngọt
 
-Đồ án tốt nghiệp — Hệ thống giám sát và điều khiển tự động môi trường trồng cải ngọt ứng dụng IoT, kết hợp cảm biến môi trường, xử lý ảnh (Computer Vision) và cảnh báo qua Telegram.
+Đồ án tốt nghiệp: Hệ thống giám sát và điều khiển tự động môi trường trồng cải ngọt ứng dụng IoT, kết hợp cảm biến môi trường, xử lý ảnh và cảnh báo qua Telegram.
 
-**Thực hiện bởi:** Trần Hoàng Trí & Trần Văn Thịnh
+Thực hiện bởi: Trần Hoàng Trí và Trần Văn Thịnh
 
 ---
 
-## 📋 Tổng quan hệ thống
+Tổng quan hệ thống
 
 Hệ thống giám sát 16 cây cải ngọt trồng trong khay 40×40cm (lưới 4×4), tự động:
 - Đo nhiệt độ, độ ẩm không khí, độ ẩm đất, cường độ ánh sáng theo thời gian thực.
 - Tự động tưới nước (bơm dạng xung) và bật quạt thông gió theo ngưỡng ứng với từng giai đoạn sinh trưởng.
-- Chụp ảnh định kỳ (5 lần/ngày) và phân tích màu sắc lá (OpenCV) để đánh giá sức khoẻ từng cây.
+- Chụp ảnh định kỳ (3 lần/ngày) và phân tích màu sắc lá (OpenCV) để đánh giá sức khoẻ từng cây.
 - Gửi cảnh báo tức thời qua Telegram Bot khi có bất thường.
-- Xuất báo cáo Excel hàng tuần và gửi qua email tự động.
 - Dashboard web theo dõi trực tiếp, điều khiển thủ công/tự động.
 
 ---
 
-## 🏗️ Kiến trúc hệ thống
+Kiến trúc hệ thống
 
 ```
 ┌─────────────────┐     HTTP POST      ┌──────────────────────┐
@@ -41,7 +40,7 @@ Hệ thống giám sát 16 cây cải ngọt trồng trong khay 40×40cm (lướ
 
 ---
 
-## 🔧 Phần cứng
+Phần cứng
 
 | Thành phần | Model |
 |---|---|
@@ -50,17 +49,17 @@ Hệ thống giám sát 16 cây cải ngọt trồng trong khay 40×40cm (lướ
 | Cảm biến nhiệt độ/độ ẩm | DHT22 |
 | Cảm biến ánh sáng | BH1750 |
 | Cảm biến độ ẩm đất | Capacitive Soil Moisture v1.2 |
-| Module relay | SONGLE SRD-12VDC-SL-C (2 kênh, Active LOW) |
+| Module relay | SONGLE SRD-12VDC-SL-C (2 kênh, Active HIGH) |
 | Bơm nước | Motor 365 12V |
 | Quạt thông gió | WFX W8025SM 12V brushless |
 | Nguồn hạ áp | LM2596 buck converter |
 | Nạp code ESP32-CAM | Adapter MG-328 (FTDI) |
 
-**Lưu ý wiring:** Relay dùng logic Active LOW, đấu terminal NO, nguồn 12V vào DC+/DC−, chung GND với ESP32. Nên gắn diode chống dòng ngược (flyback diode) 1N4007 song song với bơm/quạt.
+Lưu ý: Relay dùng logic Active HIGH, đấu terminal NO, nguồn 12V vào DC+/DC−, chung GND với ESP32. Nên gắn diode chống dòng ngược 1N4007 song song với bơm/quạt.
 
 ---
 
-## 💻 Công nghệ sử dụng
+Công nghệ sử dụng
 
 - **Firmware:** Arduino (C++) cho ESP32 & ESP32-CAM
 - **Backend:** Python 3 + Flask, Gunicorn
@@ -68,12 +67,12 @@ Hệ thống giám sát 16 cây cải ngọt trồng trong khay 40×40cm (lướ
 - **Xử lý ảnh:** OpenCV (opencv-python-headless)
 - **Lịch chạy nền:** APScheduler
 - **Thông báo:** Telegram Bot API
-- **Báo cáo:** openpyxl (Excel) + SMTP Gmail
+- **Báo cáo:** Excel
 - **Hosting:** Render.com (free tier, region Singapore) + UptimeRobot (ping giữ service không sleep)
 
 ---
 
-## 📂 Cấu trúc thư mục
+Cấu trúc thư mục
 
 ```
 .
@@ -93,9 +92,9 @@ Hệ thống giám sát 16 cây cải ngọt trồng trong khay 40×40cm (lướ
 
 ---
 
-## ⚙️ Cài đặt & Triển khai
+Cài đặt & Triển khai
 
-### 1. Firmware ESP32
+1. Firmware ESP32
 
 Mở `ESP32_Main.ino` và `ESP32CAM_Main.ino`, sửa 3 dòng cấu hình đầu file:
 
@@ -107,15 +106,15 @@ const char* SERVER_URL    = "https://ten-app-cua-ban.onrender.com";
 
 Nạp `ESP32_Main.ino` vào ESP32 38-pin, và `ESP32CAM_Main.ino` vào ESP32-CAM (nối GPIO0 → GND khi nạp, tháo ra khi chạy thật).
 
-### 2. Backend trên Render.com
+2. Backend trên Render.com
 
 1. Tạo **Web Service** mới trên Render, kết nối repo GitHub này.
-2. Tạo **PostgreSQL** database (free tier) trên Render, lấy **Internal Database URL**.
+2. Tạo **PostgreSQL** database (miễn phí) trên Render, lấy **Internal Database URL**.
 3. Vào **Environment**, thêm các biến (xem đầy đủ trong `.env.example`):
 
    | Biến | Mô tả |
    |---|---|
-   | `DATABASE_URL` | Internal DB URL từ Render Postgres |
+   | `DATABASE_URL` | Internal Database URL từ Render Postgres |
    | `TELEGRAM_TOKEN` | Token bot Telegram (từ BotFather) |
    | `TELEGRAM_CHAT_ID` | Chat ID nhận cảnh báo |
    | `EMAIL_SENDER` | Gmail gửi báo cáo |
@@ -131,11 +130,11 @@ Nạp `ESP32_Main.ino` vào ESP32 38-pin, và `ESP32CAM_Main.ino` vào ESP32-CAM
 
 - Kiểm tra dashboard tại `https://ten-app-cua-ban.onrender.com`.
 - Bật ESP32, xem log Serial xác nhận gửi dữ liệu thành công (`HTTP 200`).
-- Chờ đến khung giờ chụp gần nhất (6:00/9:00/12:00/15:00/18:00) để ESP32-CAM gửi ảnh, hoặc test thủ công bằng cách sửa tạm `SHOOT_HOURS`.
+- Chờ đến khung giờ chụp gần nhất (7:00/12:00/17:00) để ESP32-CAM gửi ảnh, hoặc ấn chụp thủ công 
 
 ---
 
-## 🔌 API chính (Flask)
+API chính (Flask)
 
 | Endpoint | Method | Mô tả |
 |---|---|---|
@@ -154,28 +153,23 @@ Nạp `ESP32_Main.ino` vào ESP32 38-pin, và `ESP32CAM_Main.ino` vào ESP32-CAM
 
 ---
 
-## 🌱 4 giai đoạn sinh trưởng & ngưỡng điều khiển
+4 giai đoạn sinh trưởng & ngưỡng điều khiển
 
 | Giai đoạn | Độ ẩm đất | Nhiệt độ bật quạt |
 |---|---|---|
-| Nảy mầm | 60–80% | > 30°C |
-| Cây con | 55–75% | > 32°C |
-| Sinh trưởng | 45–70% | > 35°C |
-| Thu hoạch | 40–65% | > 35°C |
+| Nảy mầm | 60–80% | > 34°C |
+| Cây con | 55–75% | > 35°C |
+| Sinh trưởng | 45–70% | > 36°C |
+| Thu hoạch | 40–65% | > 36°C |
 
 Ngưỡng có thể đổi trực tiếp trên dashboard mà **không cần nạp lại firmware**.
 
 ---
 
-## 🛡️ Cơ chế an toàn & dự phòng
+Cơ chế an toàn & dự phòng
 
 - **Bơm dạng xung** (5s bơm → 3s nghỉ → đọc lại đất), tự dừng nếu tổng thời gian bơm vượt 60s mà đất vẫn chưa đủ ẩm (nghi lỗi cảm biến/tắc ống/hỏng bơm).
 - **Tự reconnect WiFi** nếu ESP32 bị rớt mạng giữa chừng.
-- **Backup DB tự động** 2 lần/tuần (Thứ Hai & Thứ Năm, 6:00 sáng) qua Telegram, vì PostgreSQL free tier của Render hết hạn sau 30 ngày.
-- **Cảnh báo Telegram** có cooldown riêng theo từng loại để tránh spam tin nhắn.
+- **Backup Database tự động** 2 lần/tuần (Thứ Hai và Thứ Năm, 6:00 sáng) qua Telegram, vì PostgreSQL miễn phí của Render hết hạn sau 30 ngày.
+- **Cảnh báo Telegram** có phân loại cảnh báo riêng theo từng loại để tránh spam tin nhắn.
 
----
-
-## 📄 Giấy phép
-
-Đồ án phục vụ mục đích học tập — Trường [Tên trường], Khoa Điện – Điện tử.
