@@ -522,14 +522,8 @@ void setRelay(const char* device, bool on) {
 // ════════════════════════════════════════════════
 // ĐỌC ĐỘ ẨM ĐẤT
 // ════════════════════════════════════════════════
-// Mốc hiệu chuẩn (cập nhật ngày 18/9/2026 — sau khi board bị ảnh hưởng bởi nước bắn vào mạch,
-// độ nhạy giảm nên phải nới lại dải đo để phản ánh đúng khả năng thực tế của cảm biến):
-//   Ướt (ngâm ngập nước)  : raw thực đo ~1050  -> ánh xạ thành 100%
-//   Khô (raw thực đo trực tiếp trước đó ~2370-2400) -> ánh xạ thành ~25% (không về hẳn 0%,
-//     chừa biên vì cảm biến thực tế không bao giờ đọc được raw cao hơn nữa dù đất có khô cỡ nào;
-//     đồng thời kéo mức đất ướt bình thường (raw~2034) lên ~45% theo yêu cầu thực tế quan sát được)
-const int SOIL_RAW_DRY = 2500;   // ứng với ~25% khi raw thực tế chạm khoảng 2400 (khô nhất đo được)
-const int SOIL_RAW_WET = 750;   // ứng với 100% khi ngâm ngập nước
+const int SOIL_RAW_DRY = 2500;
+const int SOIL_RAW_WET = 750;
 
 // Số mẫu lấy mỗi lần đọc + khoảng cách giữa các mẫu (ms). 9 mẫu là đủ để lọc dao
 // động tức thời do đất không đồng nhất (túi khí, độ chặt không đều quanh que đo)
